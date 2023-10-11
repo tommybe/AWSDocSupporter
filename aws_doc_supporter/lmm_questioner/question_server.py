@@ -25,12 +25,9 @@ def run_aws_questioner(path_to_vector_db: str, flask_host: str, flask_port: int)
     del vectordb
 
     questioner = Questioner(retriever)
-    # questioner.ask_simple_question("What is SageMaker?")
 
-    flask_app.add_url_rule("/ask_simple_question/<question>", "ask_simple_question", questioner.ask_simple_question)
-    # flask_app.add_url_rule("/get_shot_type/<shot_id>", "get_shot_type", questioner.assign_shot_type)
-    # flask_app.add_url_rule("/get_org_code", "get_org_code", questioner.assign_org_code)
-    # flask_app.add_url_rule("/get_user/<shot_id>", "get_user", questioner.assign_user_for_training)
+    flask_app.add_url_rule("/get_answer/<question>", "get_answer", questioner.get_answer)
+    flask_app.add_url_rule("/get_document/<question>", "get_document", questioner.get_document)
     Thread(target=flask_app.run, kwargs={"host": flask_host, "port": flask_port, "debug": False}).start()
 
 
@@ -50,4 +47,3 @@ def main():
 
 if __name__ == "__main__":
     run()
-    # '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', 'home/inquisitor/AWSDocSupporter/vectors', '127.0.0.1',5000
