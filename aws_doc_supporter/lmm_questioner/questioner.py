@@ -30,7 +30,7 @@ class Questioner:
         source_documents = qa_retriever({'query': question})["source_documents"]
         logging.info(f'Document in which you can find answer: {source_documents}')
         #TODO - create better output formatting
-        return source_documents
+        return str(source_documents)
 
     def get_similar_documents(self):
         print('#TODO')
